@@ -1,0 +1,239 @@
+## Santolin et al. (2024)
+
+::: columns
+:::: {.column width="60%"}
+::::: incremental
+
+- Chunking the continuous speech stream: major milestone in language acquisition
+- From newborns to adults, continuous speech stream preferentially chunked into syllables
+- Syllables are a privileged linguistic unit during early language acquisition [@bijeljac19934; @bertoncini1995morae]
+- Do infant *encode*-*generalize* internal structure of syllables?
+
+:::::
+::::
+:::: {.column}
+::::
+:::
+
+## Santolin et al. (2024)
+
+**Head-turn Preference Procedure**
+
+::: {.columns}
+:::: {.column}
+*Familiarization phase*
+
+|CVC|CCV|
+|---|---|
+|sam|sma|
+|gel|gle|
+|pus|psu|
+|dor|dro|
+|sen|sne|
+
+::::
+:::: {.column}
+*Test phase*
+
+|CVC|CCV|
+|---|---|
+|sap|spa|
+|kos|kso|
+
+::::
+:::
+
+## Santolin et al. (2024)
+
+::: columns
+:::: {.column}
+- Infants encode and generalise CVC and CCV syllabic structures **only when familiarized with CVC**
+- Generalisation occurs **regardless of phonetic information**
+::::
+:::: {.column}
+![](img/santolin2024.jpg){width=90%}
+::::
+:::
+
+## Aims
+
+::: columns
+:::: {.column width="70%"}
+::::: incremental
+
+- Are CCV syllables more **difficult** to process than CVC syllables?
+- Have infants accumulated more **exposure** with the more frequent `CVC` than with `CCV`?
+- Simulate experimental outputs using **Recurrent Neural Networks (RNN)** (testing bench)
+
+:::::
+::::
+:::: {.column}
+::::
+:::
+
+## Neural Networks (RNN)
+
+::: columns
+:::: {.column width="70%"}
+
+- Bunch of regression models (nodes) stacked in layers
+- Receive **input**, generate **output**
+- Some nodes inform other nodes via connections whose relative importance is determined by *weights*
+
+::::
+:::: {.column}
+::::
+:::
+
+## *Recurrent* Neural Networks (RNN)
+
+::: columns
+:::: {.column width="70%"}
+
+- Account for arbitrarily unfolding **time series**
+- Receive the additional input of their own previous state
+- Routinely used in speech recognition, text processing (e.g., transformers), and speech generation software
+
+::::
+:::: {.column}
+::::
+:::
+
+## Proof of concept
+
+::: columns
+:::: {.column width="70%"}
+
+**Supervised audio classification task**
+
+* Starting small: CV vs. VC diphones
+* Keep the model as **simple** (i.e., interpretable) as possible
+
+@magnuson2020earshot
+
+::::
+:::: {.column}
+::::
+:::
+
+## Audio processing
+
+::: columns
+:::: {.column width="90%"}
+::::: incremental
+
+* 7,000 audios, 700 unique **diphones** $\times$ 10 speakers^[Apple Text-to-Speech, @magnuson2020earshot]
+    - 3500 consonant-vowel (CV)
+    - 3500 consonant-vowel (VC)
+- Amplitude envelope [@deloche2024acoustic]
+- Normalized amplitude and duration (downsampling) across audios 
+
+:::::
+::::
+:::: {.column}
+::::
+:::
+
+---
+
+![](img/envelopes.png)
+
+--- 
+
+![](img/training-dataset.png)
+
+## RNN structure
+
+::: incremental
+
+- **1 input node** (receiving one audio sample in each time step)
+- **2x2 recurrent nodes**
+- **1 output node** ($\sigma$ activation function), outputs a probability $\in [0, 1]$
+    - $\approx 1$ more likely `CV`, $\approx 0$, more likely `VC`
+
+:::
+
+![](img/struct.png)
+
+## RNN structure
+
+- **1 input node** (receiving one audio sample in each time step)
+- **2x2 recurrent nodes**
+- **1 output node** ($\sigma$ activation function), outputs a probability $\in [0, 1]$
+    - $\approx 1$ more likely `CV`, $\approx 0$, more likely `VC`
+
+![](img/struct-2.png)
+
+
+## Model training
+
+::: columns
+:::: {.column width="70%"}
+::::: box
+
+- Optimizer: `ADAM` ($\epsilon = 0.001$)
+- Binary cross-entropy loss function
+- 30 epochs (early stopping at 95% accuracy)
+- Batch size: 16
+
+:::::
+::::
+:::: {.column width="30%"}
+![Tensorflow + Keras](img/tf.jpg)
+::::
+:::
+
+(Still tweaking things around.)
+
+
+# Results {.inverse}
+
+## Preliminary results
+
+![](img/metrics.png)
+
+## Preliminary results
+
+![](img/test-accuracy.png)
+
+## Preliminary results
+
+![](img/roc.png)
+
+## Future steps
+
+::: incremental
+
+- Use **spectrograms** instead of envelope [e.g., @magnuson2020earshot]
+- **Unsupervised learning**: replace output node with output layer (generation of spectrograms)
+    - Encoder-decoder: What does the model think stereotipical CV or VC spectrograms look like?
+- More complex syllable structures: **CVC, CCV**
+- Take a look at *embeddings*
+
+:::
+
+## Future steps
+
+Is the model better at classifying CVCs than CCVs? [@santolin2024abstract]
+
+...
+
+::: box
+- *Yes*: **complexity** of the speech signal? (e.g., CC cluster)
+- *No*:  infants have accumulated more **experience** with CVC (more frequent) than CCV?
+    - If so, can we reproduce the results by manipulating the frequency of each syllabic structure in the model's input
+:::
+
+## Discussion
+
+::: incremental
+
+- Getting there
+- Usefulness of a working model go beyond this project 
+- More technical difficulties than antipated
+- Patience needed, but little time (SIDE PROJECT)
+
+:::
+
+## References
+
