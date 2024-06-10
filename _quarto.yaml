@@ -1,4 +1,4 @@
-title: Using RNN to model syllabic structure discrimination
+title: Using RNNs to model syllabic structure discrimination
 authors:
     - Gonzalo Garcia-Castro
     - Nuria Sebastian-Galles
@@ -23,6 +23,5 @@ cls: assets/apa7.csl
 scrollable: true
 show-slide-number: all
 slide-number: c
-date: "2024/04/30"
-conference: PH3 Meeting
+conference: "PH3 Meeting, 2024/04/30"
 location: London

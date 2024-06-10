@@ -1,15 +1,40 @@
 ## Santolin et al. (2024)
 
 ::: columns
-:::: {.column width="60%"}
+:::: {.column width="80%"}
 ::::: incremental
 
-- Chunking the continuous speech stream: major milestone in language acquisition
-- From newborns to adults, continuous speech stream preferentially chunked into syllables
-- Syllables are a privileged linguistic unit during early language acquisition [@bijeljac19934; @bertoncini1995morae]
-- Do infant *encode*-*generalize* internal structure of syllables?
+- **Chunking the continuous speech stream** into relevant linguistic units (phonemes, syllables, words, phrases): major milestone in language acquisition
+- Consensus: **syllables are advantaged** [@bijeljac19934; @bertoncini1995morae]
+- From birth, infants can discriminate between syllables, based on their internal structure (e.g., CV, VC, CVC, CCV).
 
 :::::
+::::
+:::
+
+## Syllable chunking and structure classification: mechanisms?
+
+Language universals as *Gates to Language* (GaLa):
+
+* **Sonority Sequencing Principle** (SSP): sonority peaks at syllable nucleus.
+* **Maximal Onset Principle** (MOP): consonants are preferably grouped at the onset of a syllable instead of coda.
+
+## Sonority Sequencing Principle (SSP)
+
+![Sonority Sequencing Principle (SSP). Figure from Santolin et al., (2024).](img/ssp.PNG)
+
+## Sonority Sequencing Principle (SSP)
+
+::: columns
+:::: {.column width="80%"}
+
+Experimental series involving:
+
+* Neonates (fNIRS)
+* Infants (HPP)
+* Long-Evans rats (behavioural)
+* Artificial Recurrent Neural Networks (**RNNs**)
+
 ::::
 :::: {.column}
 ::::
@@ -17,10 +42,18 @@
 
 ## Santolin et al. (2024)
 
+::: box
+Do infant *encode*-*generalize* internal structure of syllables?
+:::
+
+::: columns
+:::: {.column width="30%"}
+
 **Head-turn Preference Procedure**
 
-::: {.columns}
-:::: {.column}
+::::
+
+:::: {.column width="35%"}
 *Familiarization phase*
 
 |CVC|CCV|
@@ -32,7 +65,7 @@
 |sen|sne|
 
 ::::
-:::: {.column}
+:::: {.column width="35%"}
 *Test phase*
 
 |CVC|CCV|
@@ -55,15 +88,16 @@
 ::::
 :::
 
-## Aims
+## Research question
 
 ::: columns
 :::: {.column width="70%"}
 ::::: incremental
+::::: box
+Are CCV syllables more **difficult** to process than CVC syllables?
+:::::
 
-- Are CCV syllables more **difficult** to process than CVC syllables?
-- Have infants accumulated more **exposure** with the more frequent `CVC` than with `CCV`?
-- Simulate experimental outputs using **Recurrent Neural Networks (RNN)** (testing bench)
+Simulate experimental outputs using **Recurrent Neural Networks (RNN)**
 
 :::::
 ::::
@@ -71,7 +105,7 @@
 ::::
 :::
 
-## Neural Networks (RNN)
+## Neural Networks (NN)
 
 ::: columns
 :::: {.column width="70%"}
@@ -106,7 +140,7 @@
 
 **Supervised audio classification task**
 
-* Starting small: CV vs. VC diphones
+* Starting small: CV vs. VC syllables
 * Keep the model as **simple** (i.e., interpretable) as possible
 
 @magnuson2020earshot
@@ -122,9 +156,9 @@
 :::: {.column width="90%"}
 ::::: incremental
 
-* 7,000 audios, 700 unique **diphones** $\times$ 10 speakers^[Apple Text-to-Speech, @magnuson2020earshot]
+* 7,000 audios, 700 unique **syllables** $\times$ 10 speakers^[Apple Text-to-Speech, @magnuson2020earshot]
     - 3500 consonant-vowel (CV)
-    - 3500 consonant-vowel (VC)
+    - 3500 vowel-consonant (VC)
 - Amplitude envelope [@deloche2024acoustic]
 - Normalized amplitude and duration (downsampling) across audios 
 
@@ -216,7 +250,6 @@
 
 Is the model better at classifying CVCs than CCVs? [@santolin2024abstract]
 
-...
 
 ::: box
 - *Yes*: **complexity** of the speech signal? (e.g., CC cluster)
@@ -224,16 +257,8 @@ Is the model better at classifying CVCs than CCVs? [@santolin2024abstract]
     - If so, can we reproduce the results by manipulating the frequency of each syllabic structure in the model's input
 :::
 
-## Discussion
 
-::: incremental
 
-- Getting there
-- Usefulness of a working model go beyond this project 
-- More technical difficulties than antipated
-- Patience needed, but little time (SIDE PROJECT)
-
-:::
 
 ## References
 
